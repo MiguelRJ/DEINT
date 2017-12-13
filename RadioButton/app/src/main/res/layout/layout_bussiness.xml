@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraitBussiness"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    app:layout_constraintTop_toBottomOf="@id/rgTypeClient">
+
+    <TextView
+        android:id="@+id/txvBussinessID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txvBussinessid"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtBussinessID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toBottomOf="@id/txvBussinessID" />
+
+    <TextView
+        android:id="@+id/txvRepresentative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txvRepresentative"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toBottomOf="@id/edtBussinessID" />
+
+    <EditText
+        android:id="@+id/edtRepresentative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toBottomOf="@id/txvRepresentative" />
+
+    <TextView
+        android:id="@+id/txvNumEmployees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txvEmployees"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toBottomOf="@id/edtRepresentative" />
+
+    <EditText
+        android:id="@+id/edtNumEmployees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/guidelineBussines"
+        app:layout_constraintTop_toBottomOf="@id/txvNumEmployees" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineBussines"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

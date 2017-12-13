@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraitParticular"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    app:layout_constraintTop_toBottomOf="@id/rgTypeClient">
+
+    <TextView
+        android:id="@+id/txvNombreParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txvNombre"
+        app:layout_constraintStart_toStartOf="@id/guidelineParticular"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtNombreParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/guidelineParticular"
+        app:layout_constraintTop_toBottomOf="@id/txvNombreParticular" />
+
+    <TextView
+        android:id="@+id/txvProfesionParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txvProfesion"
+        app:layout_constraintStart_toStartOf="@id/guidelineParticular"
+        app:layout_constraintTop_toBottomOf="@id/edtNombreParticular" />
+
+    <EditText
+        android:id="@+id/edtProfesionParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/guidelineParticular"
+        app:layout_constraintTop_toBottomOf="@id/txvProfesionParticular" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+</android.support.constraint.ConstraintLayout>
