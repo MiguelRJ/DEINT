@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- https://material.io/color/#!/ -->
+    <color name="colorPrimary">#558b2f</color>
+    <color name="colorPrimaryDark">#255d00</color>
+    <color name="colorAccent">#fdd835</color>
+    <color name="colorGoogle">#e25f43</color>
+    <color name="colorFacebook">#395998</color>
+    <color name="colorPrimaryLogin">#ffffff</color>
+</resources>

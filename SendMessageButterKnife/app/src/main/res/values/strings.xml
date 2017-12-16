@@ -1,0 +1,21 @@
+<!--
+    Este fichero se usa para tener ordenados los textos que se monstraran en la aplicacion
+    Mediante "name" se asociara el texto de un objeto al texto dentro de la eqtiqueta <string>
+ -->
+<resources>
+    <string name="app_name">SendMessage</string>
+    <string name="txvUser">Usuario</string>
+    <string name="txvMessage">Mensaje</string>
+    <string name="txtButton">Enviar</string>
+    <!--
+        %1$s string %2$d numeros esto se usa para añadir parametros al string que no seran definidos aqui,
+        como por ejemplo un mensaje de un usuario concreto
+
+        codigo de como realizar en ViewMessageActivity.java
+        String viewUser=String.format(getResources().getString(R.string.txvViewUser),getIntent().getExtras().getString("user"));
+        haciendo format al string se podra cambiar "%1Ss" por el nombre del usuario
+        a traves de bundle e intent
+    -->
+    <string name="txvViewUser">El usuario <b>%1$s</b> te ha mandado el siguiente mensaje:</string>
+    <string name="txvViewMessage">*Mensaje enviado por el usuario*</string>
+</resources>

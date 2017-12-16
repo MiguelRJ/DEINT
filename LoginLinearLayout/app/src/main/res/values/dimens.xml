@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <dimen name="lly_login_padding">24dp</dimen>
+    <dimen name="txvSignIn_margin">30dp</dimen>
+    <dimen name="edtUser_margin">50dp</dimen>
+    <dimen name="llySingOptions_margin">20dp</dimen>
+    <dimen name="btnSignIn_margin">60dp</dimen>
+    <dimen name="btnGoogleSign_margin">5dp</dimen>
+</resources>

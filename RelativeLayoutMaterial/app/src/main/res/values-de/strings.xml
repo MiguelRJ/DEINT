@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RelativeLayoutMaterial</string>
+    <string name="btnBuy">käuflich erwerben</string>
+    <string name="btnReserved">zurückbehalten</string>
+    <string name="txvDateVitsit">datum</string>
+    <string name="txvTypeVisit">Eintrittsdatum wagen main kapf</string>
+    <string name="txvMonument">Kathedrale</string>
+</resources>
