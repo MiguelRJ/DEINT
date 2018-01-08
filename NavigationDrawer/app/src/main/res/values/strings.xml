@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NavigationDrawer</string>
+    <string name="action_home">Home</string>
+    <string name="action_dependency">dependencias</string>
+    <string name="action_sector">sectores</string>
+    <string name="action_subheader">otras opciones</string>
+</resources>
