@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/navheader_width"
+    android:layout_height="@dimen/navheader_height"
+    android:background="@drawable/material"
+    android:orientation="vertical">
+
+    <!-- Imagen perfil -->
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="@dimen/CircleImageView_width"
+        android:layout_height="@dimen/CircleImageView_heigth"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/CircleImageView_margin_top"
+        android:src="@mipmap/ic_person"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="@dimen/CircleImageView_border_width" />
+
+    <!-- TextView nombre del usuario -->
+    <TextView
+        android:id="@+id/txvUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/navheader_txv_margin_left"
+        android:text="Miguel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
+
+    <!-- TextView email del usuario -->
+    <TextView
+        android:id="@+id/txvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/navheader_txv_margin_left"
+        android:text="miguel@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse" />
+
+</LinearLayout>

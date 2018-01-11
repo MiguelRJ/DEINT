@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- activity_main.xml -->
+    <dimen name="toolbar_evelation">4dp</dimen>
+    <!-- activity_main.xml -->
+
+    <!-- header_navview.xml -->
+    <dimen name="navheader_height">192dp</dimen>
+    <dimen name="navheader_width">280dp</dimen>
+    <dimen name="navheader_txv_margin_left">8dp</dimen>
+    <dimen name="CircleImageView_width">96dp</dimen>
+    <dimen name="CircleImageView_heigth">96dp</dimen>
+    <dimen name="CircleImageView_margin_top">8dp</dimen>
+    <dimen name="CircleImageView_border_width">8dp</dimen>
+    <!-- header_navview.xml -->
+
+</resources>
