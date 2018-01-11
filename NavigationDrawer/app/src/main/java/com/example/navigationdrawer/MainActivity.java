@@ -1,7 +1,10 @@
 package com.example.navigationdrawer;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +14,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        FragmentOne.OnFragmentInteractionListener,
+        FragmentTwo.OnFragmentInteractionListener{
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -20,46 +26,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_navview);
+        setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.action_nav);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if (savedInstanceState == null) {
+            Fragment fragment = null;
+            Class fragmentClass = null;
+            fragmentClass = FragmentOne.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        }
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        setupNavigationView();
-    }
-
-    /**
-     * Metodo que inicializa el Listener NavigationItemSelected, y en base a a opcion selectionada se realiza una accion
-     */
-    private void setupNavigationView() {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        toastShort("Home");
-                        break;
-                    case R.id.action_dependency:
-                        toastShort("Dependency");
-                        break;
-                    case R.id.action_sector:
-                        toastShort("Sector");
-                        break;
-                    case R.id.action_subheader:
-                        toastShort(item.getTitle().toString());
-                        break;
-                }
-                item.setChecked(true);
-                getSupportActionBar().setTitle(item.getTitle());
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return false;
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
@@ -69,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 
     /**
@@ -99,4 +91,53 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Metodo que en base a opcion selectionada se realiza una accion
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                fragmentClass = FragmentOne.class;
+                break;
+            case R.id.action_dependency:
+                fragmentClass = FragmentTwo.class;
+                break;
+            case R.id.action_sector:
+                fragmentClass = FragmentOne.class;
+                break;
+            case R.id.action_help:
+                fragmentClass = FragmentTwo.class;
+                break;
+            case R.id.action_settings:
+                fragmentClass = FragmentOne.class;
+                break;
+            case R.id.action_aboutus:
+                fragmentClass = FragmentTwo.class;
+                break;
+        }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        toastShort(item.getTitle().toString());
+        item.setChecked(true);
+        getSupportActionBar().setTitle(item.getTitle());
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
