@@ -1,5 +1,6 @@
 package com.example.navigationdrawer;
 
+import android.graphics.Point;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,8 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
@@ -50,6 +54,26 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels;
+        Log.e("width",String.valueOf(dpWidth));
+
+        int dpWidthInt= 0;
+        if (dpWidth >= 1000){
+            dpWidthInt = Integer.parseInt(String.valueOf(dpWidth).substring(0,4));
+        } else {
+            dpWidthInt = Integer.parseInt(String.valueOf(dpWidth).substring(0,3));
+        }
+
+        Log.e("dpwidth",String.valueOf(dpWidthInt));
+
+        int width = (int) (dpWidthInt - (56 * displayMetrics.density));
+        Log.e("width",String.valueOf(width));
+        DrawerLayout.LayoutParams navP = (DrawerLayout.LayoutParams) navigationView.getLayoutParams();
+        navP.width = width;
+        navigationView.setLayoutParams(navP);
+        Log.e("getwidth",String.valueOf(navigationView.getWidth()));
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -77,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements
                 Log.d("Navigation","Se ha pulsado icono home");
                 if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.openDrawer(GravityCompat.START);
+                    Log.e("getwidth",String.valueOf(navigationView.getWidth()));
                 }
                 break;
         }

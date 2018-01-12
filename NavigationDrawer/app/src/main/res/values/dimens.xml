@@ -7,8 +7,14 @@
 
     <!-- header_navview.xml -->
     <dimen name="navheader_height">192dp</dimen>
-    <dimen name="navheader_width">280dp</dimen>
-    <dimen name="navheader_txv_margin_left">8dp</dimen>
+    <!-- Mobile:
+        Width = Screen width − 56 dp
+        Maximum width: 320dp
+        https://material.io/guidelines/layout/structure.html#structure-side-nav -->
+    <dimen name="navheader_marging_right">56dp</dimen>
+    <dimen name="navheader_max_width">320dp</dimen>
+    <dimen name="navheader_padding_left">16dp</dimen>
+    <dimen name="navheader_padding_right">16dp</dimen>
     <dimen name="CircleImageView_width">96dp</dimen>
     <dimen name="CircleImageView_heigth">96dp</dimen>
         <!-- statusbar size 24dp
