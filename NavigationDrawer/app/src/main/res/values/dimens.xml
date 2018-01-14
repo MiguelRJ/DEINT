@@ -2,25 +2,30 @@
 <resources>
 
     <!-- activity_main.xml -->
-    <dimen name="toolbar_evelation">4dp</dimen>
+        <dimen name="toolbar_evelation">4dp</dimen>
     <!-- activity_main.xml -->
 
     <!-- header_navview.xml -->
-    <dimen name="navheader_height">192dp</dimen>
-    <!-- Mobile:
-        Width = Screen width − 56 dp
-        Maximum width: 320dp
-        https://material.io/guidelines/layout/structure.html#structure-side-nav -->
-    <dimen name="navheader_marging_right">56dp</dimen>
-    <dimen name="navheader_max_width">320dp</dimen>
-    <dimen name="navheader_padding_left">16dp</dimen>
-    <dimen name="navheader_padding_right">16dp</dimen>
-    <dimen name="CircleImageView_width">96dp</dimen>
-    <dimen name="CircleImageView_heigth">96dp</dimen>
-        <!-- statusbar size 24dp
-        https://material.io/guidelines/layout/metrics-keylines.html#metrics-keylines-keylines-spacing-->
-    <dimen name="CircleImageView_margin_top">24dp</dimen>
-    <dimen name="CircleImageView_border_width">8dp</dimen>
+        <dimen name="navheader_height">192dp</dimen>
+        <dimen name="navheader_padding_left">16dp</dimen>
+        <dimen name="navheader_padding_right">16dp</dimen>
+        <dimen name="CircleImageView_width">96dp</dimen>
+        <dimen name="CircleImageView_heigth">96dp</dimen>
+            <!-- statusbar size 24dp
+            https://material.io/guidelines/layout/metrics-keylines.html#metrics-keylines-keylines-spacing-->
+        <dimen name="CircleImageView_margin_top">24dp</dimen>
+        <dimen name="CircleImageView_border_width">8dp</dimen>
     <!-- header_navview.xml -->
+
+    <!-- activity_main.xml -->
+        <!-- Mobile:
+            Width = Screen width − 56 dp
+            La clase Drawer layout tiene el campo: private static final int MIN_DRAWER_MARGIN = 64;
+            entonces el margin_right sera 56-64, es decir -8dp
+            Maximum width: 320dp
+            https://material.io/guidelines/layout/structure.html#structure-side-nav -->
+        <dimen name="navview_marging_right">-8dp</dimen>
+        <dimen name="navview_max_width">320dp</dimen>
+    <!-- activity_main.xml -->
 
 </resources>

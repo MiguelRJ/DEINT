@@ -1,7 +1,9 @@
 package com.example.navigationdrawer;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
+import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -52,28 +54,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels;
-        Log.e("width",String.valueOf(dpWidth));
-
-        int dpWidthInt= 0;
-        if (dpWidth >= 1000){
-            dpWidthInt = Integer.parseInt(String.valueOf(dpWidth).substring(0,4));
-        } else {
-            dpWidthInt = Integer.parseInt(String.valueOf(dpWidth).substring(0,3));
-        }
-
-        Log.e("dpwidth",String.valueOf(dpWidthInt));
-
-        int width = (int) (dpWidthInt - (56 * displayMetrics.density));
-        Log.e("width",String.valueOf(width));
-        DrawerLayout.LayoutParams navP = (DrawerLayout.LayoutParams) navigationView.getLayoutParams();
-        navP.width = width;
-        navigationView.setLayoutParams(navP);
-        Log.e("getwidth",String.valueOf(navigationView.getWidth()));
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -121,9 +102,10 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
+        // int id = item.getItemId(); // El id por si quiero hacerlo con if else
         Fragment fragment = null;
         Class fragmentClass = null;
+        boolean preferences = false; // Para saber si se ha elegido la opcion de preferencias
         switch (item.getItemId()) {
             case R.id.action_home:
                 fragmentClass = FragmentOne.class;
@@ -138,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
                 fragmentClass = FragmentTwo.class;
                 break;
             case R.id.action_settings:
-                fragmentClass = FragmentOne.class;
+                preferences = true;
                 break;
             case R.id.action_aboutus:
                 fragmentClass = FragmentTwo.class;
@@ -146,11 +128,11 @@ public class MainActivity extends AppCompatActivity implements
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         toastShort(item.getTitle().toString());
         item.setChecked(true);
@@ -158,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if (preferences) {
+            startActivity(new Intent(MainActivity.this, PreferencesActivity.class));
+        }
+
         return true;
     }
 

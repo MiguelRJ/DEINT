@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:paddingLeft="@dimen/navheader_padding_left"
     android:paddingRight="@dimen/navheader_padding_right"
-    android:maxWidth="@dimen/navheader_max_width"
     android:layout_height="@dimen/navheader_height"
     android:background="@drawable/material"
     android:orientation="vertical">

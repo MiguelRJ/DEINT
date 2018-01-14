@@ -9,4 +9,31 @@
     <string name="action_help">Ayuda</string>
     <string name="hello_blank_fragment_one">Hola fragmento vacio uno!!</string>
     <string name="hello_blank_fragment_two">Hola fragmento vacio dos!!</string>
+
+    <string name="pref_category_general">Preferences</string>
+    <string name="inline_preferences">Preferencias 1</string>
+    <string name="title_checkbox_preference">CheckBox</string>
+    <string name="summary_checkbox_preference">Checkbox Preference</string>
+    <string name="dialog_based_preferences">Dialog Prefernces</string>
+    <string name="title_edittext_preference">EditText</string>
+    <string name="summary_edittext_preference">EditText Preferences</string>
+    <string name="dialog_title_edittext_preference">Dialog EditText</string>
+    <string name="title_list_preference">List</string>
+    <string name="summary_list_preference">ListPreferences</string>
+    <string name="dialog_title_list_preference">Dialog List</string>
+
+    <string-array name="entries_list_preference">
+        <item>English (US)</item>
+        <item>English (UK)</item>
+        <item>French (France)</item>
+        <item>Spanish (Spain)</item>
+        <item>Italian</item>
+    </string-array>
+    <string-array name="entryvalues_list_preference">
+        <item>"en-US"</item>
+        <item>"en-GB"</item>
+        <item>"fr-FR"</item>
+        <item>"es-ES"</item>
+        <item>"it-IT"</item>
+    </string-array>
 </resources>
