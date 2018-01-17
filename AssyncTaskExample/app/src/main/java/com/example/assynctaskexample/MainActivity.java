@@ -1,5 +1,8 @@
 package com.example.assynctaskexample;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,27 +13,22 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HiddenFragment.TaskCallbacks {
 
     private Button btnSort,btnCancel;
     private ProgressBar progressBar;
     private TextView txvMessage;
-    private static final int MAX_LENGHT = 200000;
-    private int[] numbers = new int[MAX_LENGHT];
+    //SimpleAsyncTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txvMessage = findViewById(R.id.txvMessage);
-        generateNumbers();
-    }
-
-    private void generateNumbers() {
-        Random rnd = new Random();
-        for (int i = 0; i<MAX_LENGHT;i++){
-            numbers[i] = rnd.nextInt();
-        }
+        btnSort = findViewById(R.id.btnSort);
+        btnCancel = findViewById(R.id.btnCancel);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setProgress(0);
     }
 
     public void onClickSort(View view) {
@@ -38,11 +36,92 @@ public class MainActivity extends AppCompatActivity {
         bubbleSort(numbers);
         txvMessage.setText("Operacion terminada.");*/
         /* // Opcion 2: Crear un hilo para la ejecucion del metodo bubbleSort y actualizacion del mensaje
-         */
-        execWithThread();
+        execWithThread();*/
+        /* // Opcion 3: SimpleAsyncTask
+        task = new SimpleAsyncTask();
+        task.execute();*/
+        /* // Opcion 4: */
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(new HiddenFragment(),HiddenFragment.TAG);
+        ft.commit();
     }
 
-    private void execWithThread() {
+    public void onClickCancel(View view) {
+        //task.cancel(true);
+    }
+
+    @Override
+    public void onPreExecute() {
+        btnCancel.setVisibility(View.VISIBLE);
+        btnSort.setEnabled(false);
+        txvMessage.setText("Empezar");
+    }
+
+    @Override
+    public void onProgressUpdate() {
+        txvMessage.setText(String.valueOf(values[0])+"%");
+        progressBar.setProgress(values[0]);
+    }
+
+    @Override
+    public void onPostExecute() {
+        btnCancel.setVisibility(View.INVISIBLE);
+        btnSort.setEnabled(true);
+        txvMessage.setText("Operacion terminada.");
+    }
+
+    @Override
+    public void onCancelled() {
+        btnCancel.setVisibility(View.INVISIBLE);
+        btnSort.setEnabled(true);
+        txvMessage.setText("Operacion cancelada.");
+    }
+
+    /*private class SimpleAsyncTask extends AsyncTask<Void,Integer,Void> {
+        // doInBackground <Void,
+        // publis Integer,
+        // postexecuted Void>
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            btnCancel.setVisibility(View.VISIBLE);
+            btnSort.setEnabled(false);
+            txvMessage.setText("Empezar");
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            btnCancel.setVisibility(View.INVISIBLE);
+            btnSort.setEnabled(true);
+            txvMessage.setText("Operacion terminada.");
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            txvMessage.setText(String.valueOf(values[0])+"%");
+            progressBar.setProgress(values[0]);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            btnCancel.setVisibility(View.INVISIBLE);
+            btnSort.setEnabled(true);
+            txvMessage.setText("Operacion cancelada.");
+        }
+
+    }*/
+
+    /*private void execWithThread() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -52,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         txvMessage.setText("Empezar");
                     }
                 });
-                bubbleSort(numbers);
+                bubbleSort();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -61,38 +140,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }).start();
-    }
-
-    private void bubbleSort(int[] A) {
-        int i, j, aux;
-
-        for(i = 0; i < A.length - 1; i++) {
-
-            for (j = i + 1; j < A.length - i - 1; j++) {
-
-                if (A[i] > A[j]) {
-
-                    aux = A[j];
-                    A[j] = A[i];
-                    A[j] = aux;
-
-                }
-
-            }
-
-        }
-
-    }
-
-    private class SimpleAsyncTask extends AsyncTask<Void,Integer,Void>{
-        // doInBackground
-        // publis
-        // postexecuted
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            return null;
-        }
-    }
+    }*/
 
 }
