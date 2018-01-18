@@ -17,12 +17,13 @@ public class HiddenFragment extends Fragment {
     public static final String TAG = "HiddenFragment";
 
     private TaskCallbacks mTaskCallbacks;
-    private static final int MAX_LENGHT = 20000;
+    private static final int MAX_LENGHT = 80000;
     private int[] numbers = new int[MAX_LENGHT];
+    ProgressBarTask progressBarTask;
 
     static interface TaskCallbacks {
         void onPreExecute();
-        void onProgressUpdate();
+        void onProgressUpdate(Integer... values);
         void onPostExecute();
         void onCancelled();
     }
@@ -32,7 +33,7 @@ public class HiddenFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         generateNumbers();
-        ProgressBarTask progressBarTask = new ProgressBarTask();
+        progressBarTask = new ProgressBarTask();
         progressBarTask.execute();
     }
 
@@ -41,6 +42,10 @@ public class HiddenFragment extends Fragment {
         for (int i = 0; i < MAX_LENGHT;i++){
             numbers[i] = rnd.nextInt();
         }
+    }
+
+    public void OnCancel(){
+        progressBarTask.cancel(true);
     }
 
     @Override
@@ -95,7 +100,7 @@ public class HiddenFragment extends Fragment {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             if (mTaskCallbacks!=null){
-                mTaskCallbacks.onProgressUpdate();
+                mTaskCallbacks.onProgressUpdate(values[0]);
             }
         }
 
