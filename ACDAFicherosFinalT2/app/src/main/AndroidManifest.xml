@@ -25,12 +25,14 @@
         <service android:name=".service.ServiceAsyncHttpResponseHandler">
 
         </service>
+
         <receiver android:name=".service.MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.example.ficherosfinal.service.success"/>
                 <action android:name="com.example.ficherosfinal.service.failure"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

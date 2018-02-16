@@ -1,13 +1,18 @@
 package com.example.ficherosfinal;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +36,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TAG = "MainActivity";
     private EditText edtImagen, edtFrase;
     private ImageView imgImagen;
     private TextView txvTexto;
@@ -41,6 +47,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //OperacionesFichero opFi;
     ProgressDialog progress;
     //String errores = "http://alumno.mobi/superior/rodriguez/uploads/errores.txt";
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()){
+                case MyIntentService.INTENT_ACTION_FAILURE:
+                    // descargaError(origin) (intent)
+                    Log.e(TAG, "Descarga fallida" + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
+                    break;
+                case MyIntentService.INTENT_ACTION_SUCCESS:
+                    // change(origin) (intent)
+                    Log.e(TAG, "descargar correcta" + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +77,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progress = new ProgressDialog(this);
         //opFi = new OperacionesFichero();
         leerTiempo();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(MyIntentService.INTENT_ACTION_FAILURE);
+        intentFilter.addAction(MyIntentService.INTENT_ACTION_SUCCESS);
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
     @Override

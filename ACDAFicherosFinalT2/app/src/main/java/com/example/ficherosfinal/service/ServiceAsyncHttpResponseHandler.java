@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-
-import com.example.ficherosfinal.RestClient;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;
-
+import com.loopj.android.http.SyncHttpClient;
 import java.io.File;
-
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -27,10 +23,11 @@ public class ServiceAsyncHttpResponseHandler extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         Bundle bundle = intent.getExtras();
-        String origin = bundle.getString(MyIntentService.INTENT_DATA_SOURCE);
+        final String origin = bundle.getString(MyIntentService.INTENT_DATA_SOURCE);
         String destination = bundle.getString(MyIntentService.INTENT_DATA_DESTINATION);
         File downloadFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + destination);
-        AsyncHttpClient cliente = new AsyncHttpClient();
+        SyncHttpClient cliente = new SyncHttpClient();
+        cliente.setMaxRetriesAndTimeout(3,3000);
         cliente.get(origin, new FileAsyncHttpResponseHandler(downloadFile) {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, File file) {
@@ -41,6 +38,7 @@ public class ServiceAsyncHttpResponseHandler extends IntentService {
             @Override
             public void onSuccess(int statusCode, Header[] headers, File response) {
                 Intent newIntent = new Intent(MyIntentService.INTENT_ACTION_SUCCESS);
+                newIntent.putExtra(MyIntentService.INTENT_DATA_SOURCE,origin);
                 sendBroadcast(newIntent);
             }
         });

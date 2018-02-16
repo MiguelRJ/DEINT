@@ -7,6 +7,8 @@ import android.util.Log;
 
 /**
  * Created by usuario on 15/02/18.
+ * cuando el origen es una notificaicon el borad quien
+ * recibe el intent
  */
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
