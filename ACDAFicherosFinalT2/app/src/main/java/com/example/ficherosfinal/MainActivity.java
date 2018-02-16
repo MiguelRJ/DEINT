@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (intent.getAction()){
                 case MyIntentService.INTENT_ACTION_FAILURE:
                     // descargaError(origin) (intent)
-                    Log.e(TAG, "Descarga fallida" + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
+                    Log.e(TAG, "Descarga fallida: " + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
                     break;
                 case MyIntentService.INTENT_ACTION_SUCCESS:
                     // change(origin) (intent)
-                    Log.e(TAG, "descargar correcta" + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
+                    Log.e(TAG, "descargar correcta: " + intent.getStringExtra(MyIntentService.INTENT_DATA_SOURCE));
                     break;
             }
         }
