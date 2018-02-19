@@ -2,6 +2,7 @@ package com.example.boundservice;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -15,15 +16,17 @@ import android.widget.Chronometer;
  *
  */
 
-public class BoundService extends Service{
+public class BoundService extends Service {
 
     private Chronometer chronometer;
+    private IBinder binder;
 
     @Override
     public void onCreate() {
         super.onCreate();
         chronometer = new Chronometer(this);
         chronometer.setBase(SystemClock.elapsedRealtime());
+        binder = new MyBinder();
     }
 
     @Override
@@ -35,7 +38,17 @@ public class BoundService extends Service{
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return binder;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        return true; // se ha desvinculado el service
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
     }
 
     @Override
@@ -55,6 +68,14 @@ public class BoundService extends Service{
         int seconds = (int)(elapsedMillis-hour*3600000-minutes*60000)/1000;
         int millis = (int)(elapsedMillis-hour*3600000-minutes*60000-seconds*1000);
         return hour+":"+minutes+":"+seconds+":"+millis;
+    }
+
+    class MyBinder extends Binder {
+
+        BoundService getService(){
+            return BoundService.this;
+        }
+
     }
 
 }
